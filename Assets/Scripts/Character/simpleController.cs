@@ -3,11 +3,12 @@ using UnityEngine;
 public class simpleController : MonoBehaviour
 {
     public GameObject playerCamera;
-    public float speed;
-    public float rotationSpeed;
+    public float speed = 2.5f;
+    public float rotationSpeed = 300.0f;
     public float jumpSpeed;
     public float jumpButtonGracePeriod;
     private CharacterController characterController;
+    private Animator animator;
     public float ySpeedMin = -6.0f;
     private float ySpeed;
     private float originalStepOffset;
@@ -21,6 +22,7 @@ public class simpleController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
         originalStepOffset = characterController.stepOffset;
 
         jumped = false;
@@ -74,8 +76,10 @@ public class simpleController : MonoBehaviour
         if (movementDirection != Vector3.zero)
         {
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
-            // rbody.MoveRotation(rbody.rotation * Quaternion.AngleAxis(inputTurn * Time.deltaTime * turnMaxSpeed, Vector3.up));
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            //animator.SetBool("isMoving", true);
+        } else {
+            //animator.SetBool("isMoving", false);
         }
 
     }
