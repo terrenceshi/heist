@@ -77,9 +77,9 @@ public class simpleController : MonoBehaviour
         {
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-            //animator.SetBool("isMoving", true);
+            animator.SetBool("isMoving", true);
         } else {
-            //animator.SetBool("isMoving", false);
+            animator.SetBool("isMoving", false);
         }
 
     }
